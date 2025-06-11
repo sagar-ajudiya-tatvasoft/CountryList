@@ -10,4 +10,7 @@ import Foundation
 extension String {
     static let selectCountries = "Select Countries"
     static let searchCountries = "Search Countries"
+    static let noselectCountries = "You have not selected any country"
+    static let noCountries = "Countries not found"
+    static let india = "India"
 }

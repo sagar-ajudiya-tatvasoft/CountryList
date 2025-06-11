@@ -8,11 +8,24 @@
 import SwiftUI
 
 struct CountryListView: View {
+    // MARK: - Variable
+    @Binding var countries: [CountryResponse]
+    let didSelectCountry: (CountryResponse) -> Void
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            LazyVStack {
+                ForEach($countries) { country in
+                    CountryRowView(country: country) {
+                        didSelectCountry(country.wrappedValue)
+                    }
+                }
+            }
+        }
+        .scrollIndicators(.hidden)
     }
 }
 
 #Preview {
-    CountryListView()
+    CountryListView(countries: .constant([])) { _ in }
 }
