@@ -11,6 +11,7 @@ struct SearchBarView: View {
     // MARK: - Variable
     let placeholder: String
     @Binding var searchText: String
+    var onTap: (() -> Void)? = nil
     
     var body: some View {
         HStack {
@@ -29,11 +30,16 @@ struct SearchBarView: View {
             .autocorrectionDisabled(true)
             .textInputAutocapitalization(.never)
             .submitLabel(.done)
+            .allowsHitTesting(onTap == nil)
         }
         .padding(15)
         .background {
             RoundedRectangle(cornerRadius: 12)
                 .stroke(.appBlack, lineWidth: 0.5)
+        }
+        .contentShape(Rectangle())
+        .onTapGesture {
+            onTap?()
         }
     }
 }
