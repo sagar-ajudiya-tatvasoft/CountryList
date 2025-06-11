@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - CountryResponse
 struct CountryResponse: Codable, Identifiable {
     var id: String {
         name ?? UUID().uuidString
@@ -14,20 +15,22 @@ struct CountryResponse: Codable, Identifiable {
     let name, capital: String?
     let flags: Flags?
     let currencies: [Currency]?
-    let independent: Bool?
+    var isSelected: Bool? = false
 }
 
+// MARK: - Currency
 struct Currency: Codable {
     let code: String?
     let name: String?
     let symbol: String?
 }
 
+// MARK: - Flags
 struct Flags: Codable {
-    let svg: String?
     let png: String?
 }
 
+// MARK: - CountryRequest
 struct CountryRequest: Codable {
     var fields = "name,capital,currencies,flags"
 }
