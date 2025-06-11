@@ -39,7 +39,7 @@ extension EndPointType: Endpoint {
     var params: Requestparams {
         switch self {
         case .countries:
-            return .query(nil)
+            return .query(CountryRequest())
         }
     }
 }
