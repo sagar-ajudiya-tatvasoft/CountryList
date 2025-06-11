@@ -16,6 +16,7 @@ struct SearchBarView: View {
         HStack {
             // Left Icon
             Image(.icSearch)
+                .tint(.appRose)
             // TextField
             TextField(
                 placeholder,
