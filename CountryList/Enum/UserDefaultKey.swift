@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+enum UserDefaultKey: String {
+    case selectedCountries = "selectedCountries"
+}
