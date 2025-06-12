@@ -13,4 +13,5 @@ extension String {
     static let noselectCountries = "You have not selected any country"
     static let noCountries = "Countries not found"
     static let india = "India"
+    static let done = "Done"
 }
