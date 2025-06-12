@@ -16,6 +16,7 @@ struct KFImageView: View {
         KFImage(url)
             .resizable()
             .cancelOnDisappear(true)
+            .scaledToFill()
             .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 }

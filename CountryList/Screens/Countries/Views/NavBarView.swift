@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NavBarView: View {
     // MARK: - Variable
+    var isShowRightIcon = true
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -21,12 +22,14 @@ struct NavBarView: View {
             }
             Spacer()
             // Done
-            Button {
-                dismiss()
-            } label: {
-                Text(String.done)
-                    .font(.system(size: 16, weight: .bold))
-                    .foregroundStyle(.appRose)
+            if isShowRightIcon {
+                Button {
+                    dismiss()
+                } label: {
+                    Text(String.done)
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundStyle(.appRose)
+                }
             }
         }
     }

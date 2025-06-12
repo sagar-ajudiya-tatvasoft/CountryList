@@ -38,6 +38,10 @@ struct HomeView: View {
                 CountriesView()
                     .navigationBarBackButtonHidden()
             }
+            .navigationDestination(item: $viewModel.selectedCountry) { country in
+                CountryDetailsView(country: country)
+                    .navigationBarBackButtonHidden()
+            }
         }
     }
 }
@@ -49,6 +53,8 @@ extension HomeView {
     private var countryList: some View {
         CountryListView(countries: $viewModel.selectedCountries) { country in
             viewModel.removeSelectedCountry(country: country)
+        } didTapRow: { country in
+            viewModel.selectedCountry = country
         }
     }
     

@@ -10,6 +10,7 @@ import SwiftUI
 struct CountryRowView: View {
     // MARK: - Variable
     @Binding var country: CountryResponse
+    let didSelectCountry: () -> Void
     let didTapRow: () -> Void
 
     var body: some View {
@@ -37,15 +38,19 @@ struct CountryRowView: View {
             Spacer()
 
             // Image Icon for select and unselect
-            Image(country.isSelected == true ? .icSquareCheck : .icSquare)
+            Button {
+                withAnimation {
+                    didSelectCountry()
+                }
+            } label: {
+                Image(country.isSelected == true ? .icSquareCheck : .icSquare)
+            }
         }
         .padding(12)
         .background(.appWhite)
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .onTapGesture {
-            withAnimation {
-                didTapRow()
-            }
+            didTapRow()
         }
     }
 }

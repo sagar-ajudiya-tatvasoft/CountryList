@@ -30,6 +30,10 @@ struct CountriesView: View {
         }
         .padding(.horizontal)
         .background(.appRose15)
+        .navigationDestination(item: $viewModel.selectedCountry) { country in
+            CountryDetailsView(country: country)
+                .navigationBarBackButtonHidden()
+        }
     }
 }
 
@@ -49,6 +53,8 @@ extension CountriesView {
             // Country list
             CountryListView(countries: $viewModel.filteredCountries) { county in
                 viewModel.toggleCountrySelection(for: county.id)
+            } didTapRow: { country in
+                viewModel.selectedCountry = country
             }
         }
     }

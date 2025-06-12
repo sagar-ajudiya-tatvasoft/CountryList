@@ -53,7 +53,7 @@ struct CountryRequest: Codable {
     var fields = "name,capital,currencies,flags"
 }
 
-extension CountryResponse: Equatable {
+extension CountryResponse: Equatable, Hashable {
     static func == (lhs: CountryResponse, rhs: CountryResponse) -> Bool {
         return lhs.name == rhs.name &&
                lhs.capital == rhs.capital &&
@@ -61,6 +61,10 @@ extension CountryResponse: Equatable {
                lhs.currencies == rhs.currencies &&
                lhs.isSelected == rhs.isSelected
     }
+    
+    func hash(into hasher: inout Hasher) {
+          hasher.combine(id)
+      }
 }
 
 extension Flags: Equatable {

@@ -14,4 +14,6 @@ extension String {
     static let noCountries = "Countries not found"
     static let india = "India"
     static let done = "Done"
+    static let capital = "Capital"
+    static let currency = "Currency"
 }

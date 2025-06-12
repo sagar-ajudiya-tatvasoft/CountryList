@@ -11,6 +11,7 @@ struct CountryListView: View {
     // MARK: - Variable
     @Binding var countries: [CountryResponse]
     let didSelectCountry: (CountryResponse) -> Void
+    let didTapRow: (CountryResponse) -> Void
     
     var body: some View {
         ScrollView {
@@ -18,6 +19,8 @@ struct CountryListView: View {
                 ForEach($countries) { country in
                     CountryRowView(country: country) {
                         didSelectCountry(country.wrappedValue)
+                    } didTapRow: {
+                        didTapRow(country.wrappedValue)
                     }
                 }
             }
@@ -27,5 +30,5 @@ struct CountryListView: View {
 }
 
 #Preview {
-    CountryListView(countries: .constant([])) { _ in }
+    CountryListView(countries: .constant([])) { _ in } didTapRow: { _ in }
 }

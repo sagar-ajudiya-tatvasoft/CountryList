@@ -15,6 +15,7 @@ class HomeViewModel {
     var allCountries: [CountryResponse] = []
     var selectedCountries: [CountryResponse] = []
     var viewState: ViewState<[CountryResponse]> = .fetching
+    var selectedCountry: CountryResponse? = nil
     private let locationManager = LocationManager()
 
     func loadInitialData() async {

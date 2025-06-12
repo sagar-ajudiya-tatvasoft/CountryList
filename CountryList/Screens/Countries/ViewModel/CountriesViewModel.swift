@@ -19,6 +19,7 @@ class CountriesViewModel {
     private var countries = [CountryResponse]()
     var filteredCountries = [CountryResponse]()
     var viewState: ViewState<[CountryResponse]> = .fetching
+    var selectedCountry: CountryResponse? = nil
     
     // Fetch Country
     func fetchCountries() {
