@@ -8,24 +8,26 @@
 import Foundation
 
 struct UserDefaultManager {
-    
-    static let UserDefault = UserDefaults.standard
+    // MARK: - Variable
+    static let userDefault = UserDefaults.standard
 
+    // Set data in UserDefaults
     static func setDataWith<T: Codable>(_ userDefaultValue: T?,
                                         key userDefaultKey: UserDefaultKey) {
         if let userDefaultValue = userDefaultValue {
             if let encodedData = try? JSONEncoder().encode(userDefaultValue) {
-                UserDefault.set(encodedData, forKey: userDefaultKey.rawValue)
+                userDefault.set(encodedData, forKey: userDefaultKey.rawValue)
             }
         } else {
             removeUserDefaultWith(key: userDefaultKey)
         }
-        UserDefault.synchronize()
+        userDefault.synchronize()
     }
 
+    // Retrive data from UserDefaults
     static func getDataWith<T: Codable>(type userDefaultType: T.Type,
                                         key userDefaultKey: UserDefaultKey) -> T? {
-        if let object = UserDefault.object(forKey: userDefaultKey.rawValue) as? Data {
+        if let object = userDefault.object(forKey: userDefaultKey.rawValue) as? Data {
             let decoder = JSONDecoder()
             if let decodeValue = try? decoder.decode(userDefaultType.self, from: object) {
                 return decodeValue
@@ -34,7 +36,8 @@ struct UserDefaultManager {
         return nil
     }
 
+    // Remove data from UserDefaults
     static func removeUserDefaultWith(key userDefaultKey: UserDefaultKey){
-        UserDefault.removeObject(forKey: userDefaultKey.rawValue)
+        userDefault.removeObject(forKey: userDefaultKey.rawValue)
     }
 }

@@ -9,10 +9,11 @@ import Foundation
 import CoreData
 
 class CoreDataManager {
+    // MARK: - Variable
     static let shared = CoreDataManager()
-    
+    // Init
     private init() {}
-    
+    // CoreData Container
     private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Country")
         container.loadPersistentStores { _, error in
@@ -64,6 +65,7 @@ class CoreDataManager {
         }
     }
     
+    // Select and Unselect country
     func toggleCountrySelection(for id: String) {
         let fetchRequest: NSFetchRequest<CDCountry> = CDCountry.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id == %@", id)
@@ -78,6 +80,7 @@ class CoreDataManager {
         }
     }
     
+    // Save in to the CoreData
     private func saveContext() {
         if context.hasChanges {
             do {
