@@ -27,3 +27,20 @@ enum ViewState<V> {
         return nil
     }
 }
+
+extension ViewState: Equatable where V: Equatable {
+    static func == (lhs: ViewState<V>, rhs: ViewState<V>) -> Bool {
+        switch (lhs, rhs) {
+        case (.fetching, .fetching):
+            return true
+        case (.empty, .empty):
+            return true
+        case (.success(let a), .success(let b)):
+            return a == b
+        case (.failure(let e1), .failure(let e2)):
+            return e1.localizedDescription == e2.localizedDescription
+        default:
+            return false
+        }
+    }
+}

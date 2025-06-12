@@ -11,7 +11,7 @@ import CoreLocation
 class LocationManager: NSObject, ObservableObject {
     
     // MARK: - Properties
-    private let locationManager = CLLocationManager()
+    private let locationManager: CLLocationManager
     
     @Published var countryName: String = .india {
         didSet {
@@ -21,10 +21,11 @@ class LocationManager: NSObject, ObservableObject {
     var onCountryDetected: ((String) -> Void)?
     
     // MARK: - Init
-    override init() {
+    init(locationManager: CLLocationManager = CLLocationManager()) {
+        self.locationManager = locationManager
         super.init()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         requestPermission()
     }
     
