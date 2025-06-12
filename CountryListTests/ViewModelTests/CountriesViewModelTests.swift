@@ -59,13 +59,4 @@ final class CountriesViewModelTests: XCTestCase {
         XCTAssertEqual(selected?.first?.id, countryId)
         XCTAssertTrue(viewModel.filteredCountries.first?.isSelected ?? false)
     }
-
-    func testAutoSelectCountry() {
-        viewModel.fetchCountries()
-        viewModel.autoSelectCountry(by: "France")
-        
-        let selected = UserDefaultManager.getDataWith(type: [CountryResponse].self, key: .selectedCountries)
-        XCTAssertEqual(selected?.first?.name, "France")
-        XCTAssertTrue(viewModel.filteredCountries.first(where: { $0.name == "France" })?.isSelected ?? false)
-    }
 }

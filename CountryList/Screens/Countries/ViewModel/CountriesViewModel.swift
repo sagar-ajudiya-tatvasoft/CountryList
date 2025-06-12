@@ -67,15 +67,4 @@ class CountriesViewModel {
         CoreDataManager.shared.toggleCountrySelection(for: id)
         UserDefaultManager.setDataWith(selectedCountries, key: .selectedCountries)
     }
-
-    // Select country from current location
-    func autoSelectCountry(by name: String) {
-        guard let index = filteredCountries.firstIndex(where: { $0.name?.lowercased() == name.lowercased() }) else { return }
-        
-        filteredCountries[index].isSelected = true
-        CoreDataManager.shared.toggleCountrySelection(for: filteredCountries[index].id)
-
-        let selectedCountries = filteredCountries.filter { $0.isSelected == true }
-        UserDefaultManager.setDataWith(selectedCountries, key: .selectedCountries)
-    }
 }

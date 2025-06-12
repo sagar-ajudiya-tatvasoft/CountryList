@@ -74,9 +74,9 @@ class CoreDataManager {
             if let countryEntity = try context.fetch(fetchRequest).first {
                 countryEntity.isSelected.toggle()
                 try context.save()
-            } else {
             }
         } catch {
+            print("Failed to toggle country selection: \(error)")
         }
     }
     
@@ -86,6 +86,7 @@ class CoreDataManager {
             do {
                 try context.save()
             } catch {
+                print("Failed to save context: \(error)")
             }
         }
     }
