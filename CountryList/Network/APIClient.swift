@@ -18,11 +18,9 @@ class APIClient {
     // MARK: - Methods
     static func request<T: Decodable>(endPoint: EndPointType) async throws -> T {
         let request = try endPoint.urlRequest()
-        logRequest(request)
         
         do {
             let (data, response) = try await session.data(for: request)
-            logResponse(response, data: data)
 
             return try validateRequest(data, response: response, as: T.self)
         } catch let error as URLError {
@@ -79,32 +77,3 @@ class APIClient {
         }
     }
 }
-
-#if DEBUG
-extension APIClient {
-
-    static private func logRequest(_ request: URLRequest) {
-        print("➡️ [Request] \(request.httpMethod ?? "") \(request.url?.absoluteString ?? "")")
-        if let headers = request.allHTTPHeaderFields {
-            print("Headers: \(headers)")
-        }
-        if let body = request.httpBody,
-           let json = try? JSONSerialization.jsonObject(with: body) {
-            print("Body: \(json)")
-        }
-    }
-    
-    static private func logResponse(_ response: URLResponse?, data: Data?) {
-        if let httpResponse = response as? HTTPURLResponse {
-            print("⬅️ [Response] \(httpResponse.statusCode) \(httpResponse.url?.absoluteString ?? "")")
-            if let headers = httpResponse.allHeaderFields as? [String: String] {
-                print("Headers: \(headers)")
-            }
-            if let data = data,
-               let json = try? JSONSerialization.jsonObject(with: data) {
-                print("Response Body: \(json)")
-            }
-        }
-    }
-}
-#endif
